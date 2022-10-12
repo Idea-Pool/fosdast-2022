@@ -1,2 +1,22 @@
 @startuml
+(*) --> "Készenlét" as A1
+A1 -->[Bankkártya behelyezés] "Bankkártya elvétele a gép által" as A2
+A2 -->[PIN kód kérése] "Ellenőrzés" as A3
+
+A3 -->if "Jó-e a PIN kód?" then
+    -->[Nem] "Kártya kiadása" as A4
+    A4 -->[Bankkártya elvétele] A1
+    else
+    -->[Igen] "Pénzfelvétel gomb megnyomása" as A5
+    endif
+A5 -->[Összeg megadása] "Pénzfelvétel" as A6
+A6 -->if "Kér-e bizonylatot" then
+    -->[Igen] "Bizonylat kiadása" as A7
+    A7 -->[Bizonylat elvétele] "Pénz kiadása" as A8
+    A8 -->[Pénz elvétele] A4
+    else
+    -->[Nem] A8
+    endif
+
+A1 --> (*)
 @enduml
