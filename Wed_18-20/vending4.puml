@@ -1,2 +1,23 @@
 @startuml
+(*) --> "Készenlét" as A1
+A1 -->[Termék kiválasztása] "Ár kiírása" as A2
+A2 --> A1
+
+A1 -->[Pénz bedobása] "Számláló" as A3
+
+A3 -->if "Elég-e a pénz?" then
+    -->[Igen] if "Van-e visszajáró?" then
+        -->[Igen] "Visszajáró kidobása" as A4
+        A4 --> "Ital kiadása" as A5
+        A5 --> A1
+        else
+        -->[Nem] A5
+        endif
+
+    else
+    -->[Nem] "Pénz visszadobása" as A6
+    A6 -->A1
+    endif
+
+A1 -->(*)
 @enduml
